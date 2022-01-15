@@ -30,10 +30,10 @@ class UserCrude(UserMixin):
         else:
             return False
 
-    def UserRegister(self, data: dict):
-        self.name = data.get("login")
-        self.password = data.get("password")
-        self.password_true = data.get("password_true")
+    def UserRegister(self, name, psw, pswr):
+        self.name = name
+        self.password = psw
+        self.password_true = pswr
         if self.password != self.password_true:
             return "Passwords not same"
         else:
