@@ -12,6 +12,7 @@ class DataCrude():
         self.utr = []
         self.money = []
         self.users = {}
+        self.DoDIctUsers()
 
     def PostMoney(self, myname, name, moneyvalue, value):
         if self.CheakMoney(myname, moneyvalue, value) == True:
@@ -42,6 +43,8 @@ class DataCrude():
             return False
 
     def RecordAllName(self):
+        self.usersname = []
+
         self.fether.execute("SELECT name, password FROM Users;")
         record = self.fether.fetchall()
 
@@ -54,6 +57,8 @@ class DataCrude():
         self.sqlconn.commit()
 
     def RecordAllPasswords(self):
+        self.password = []
+
         for i in range(len(self.usersname)):
             self.fether.execute(
                 f"SELECT password FROM Users Where name = '{self.usersname[i]}';")
