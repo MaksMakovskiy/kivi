@@ -65,9 +65,20 @@ class DataCrude():
         self.RecordAllName()
         self.RecordAllPasswords()
         self.users = {}
+
         for i in range(len(self.usersname)):
+
+            self.fether.execute(
+                f"SELECT USD, UAH, RUB FROM Users WHERE name = '{self.usersname[i]}'")
+            info = self.fether.fetchall()
+            infomoney = {
+                "USD": info[0][0],
+                "UAH": info[0][1],
+                "RUB": info[0][2]
+            }
+
             self.utr.append(
-                [str(self.usersname[i]), {"password": str(self.password[i]), "money": self.money}])
+                [str(self.usersname[i]), {"password": str(self.password[i]), "money": infomoney}])
             self.utr = dict(self.utr)
             self.users.update(self.utr)
             self.utr = []

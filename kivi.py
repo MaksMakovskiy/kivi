@@ -1,3 +1,5 @@
+# 01010111 00101110 01010101 00101110 01000011 00101110
+
 from os import name
 from flask import Flask, jsonify, request, render_template
 import flask
@@ -9,13 +11,11 @@ app = Flask(__name__)
 base = DataCrude()
 login_manager = LoginManager()
 
-#
-#
-#
-#
-#
-#
-#
+
+#    #     #   #    #    ####     #
+#    #     #   #    #   #         #
+#    #  #  #   #    #   #         #
+#     ## ## .   #### .   #### .   #
 
 
 @app.route("/")
@@ -24,17 +24,17 @@ def Trsa():
     return jsonify({None: None})
 
 
-@app.route("/auth", methods=["GET", "POST"])
+@app.route("/auth", methods=["GET"])
 def autpage():
-    if request.method == "GET":
-        if request.values.get("name") != None:
-            name = request.values.get("name")
-            password = request.values.get("psw")
-        else:
-            return render_template("auth.html")
+    if request.values.get("name") != None:
+        name = request.values.get("name")
+        password = request.values.get("psw")
+        return None
+    else:
+        return render_template("auth.html")
 
 
-@app.route("/postmoney", methods=["GET", "POST"])
+@app.route("/postmoney", methods=["GET"])
 def postmoney():
     info = request.get_json(force=True)
     if user.UserCheak(info.get("name")) == True:
@@ -73,8 +73,13 @@ def regpage():
 
 @ app.route("/user/<username>", methods=["GET"])
 def mainpage(username):
-    return render_template('main.html', name=username, USD="42", UAH="62", RUB="0")
+    base.DoDIctUsers()
+    if username in base.usersname:
+        print(base.usersname)
+        return render_template('main.html', name=username, USD=base.users[username]["money"]["USD"], UAH=base.users[username]["money"]["UAH"], RUB=base.users[username]["money"]["RUB"])
+    else:
+        return jsonify({"info": f"No user with name {username}"})
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="192.168.0.103")
