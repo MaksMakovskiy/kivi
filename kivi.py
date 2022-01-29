@@ -75,6 +75,8 @@ def postmoney():
 
 @app.route("/reg", methods=["GET", "POST"])
 def regpage():
+    base.DoDIctUsers()
+    print(base.users)
     if request.method == "GET":
         if request.values.get("name") != None:
             name = request.values.get("name")
