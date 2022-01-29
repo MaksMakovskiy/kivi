@@ -7,7 +7,7 @@ from flask_login import UserMixin
 base = DataCrude()
 
 
-class Userlogin:
+class Userlogin(UserMixin):
     def __init__(self, name) -> None:
         self.__user = name
 
@@ -24,7 +24,7 @@ class Userlogin:
         return str()
 
 
-class UserCrude(UserMixin):
+class UserCrude():
     def __init__(self) -> None:
         ...
 
