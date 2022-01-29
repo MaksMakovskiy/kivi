@@ -14,6 +14,13 @@ class DataCrude():
         self.users = {}
         self.DoDIctUsers()
 
+    def seckeyget(self):
+
+        self.fether.execute(
+            f"SELECT key FROM Key;")
+        key = self.fether.fetchall()
+        return key[0][0]
+
     def PostMoney(self, myname, name, moneyvalue, value):
         if self.CheakMoney(myname, moneyvalue, value) == True:
             self.fether.execute(

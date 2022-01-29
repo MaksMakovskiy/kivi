@@ -1,17 +1,6 @@
 # 01010111 00101110 01010101 00101110 01000011 00101110
 
-from os import name, urandom
-from flask import Flask, jsonify, request, render_template, redirect, url_for, session
-import flask
-from flask.helpers import flash
-from api.user.users import user, Userlogin
-from api.database.database import DataCrude
-from flask_login import login_user, logout_user, login_required, LoginManager
-app = Flask(__name__)
-base = DataCrude()
-login_manager = LoginManager(app)
-
-app.config['SECRET_KEY'] = '\\n\\xf6\\x8dn\\xe7C\\xc6b\\x80\\xb8\\xb5\\xc5x\\x9e!4\\xe58\\xbb\\xf0j\\xfa\\xcfW'
+from moduls import *
 
 
 @login_manager.user_loader
@@ -107,7 +96,6 @@ def regpage():
 @login_required
 def mainpage(username):
     if session["name"] == username:
-        print(session["name"], type(session["name"]))
         base.DoDIctUsers()
         if username in base.usersname:
             return render_template('main.html', name=username, USD=base.users[username]["money"]["USD"], UAH=base.users[username]["money"]["UAH"], RUB=base.users[username]["money"]["RUB"])
