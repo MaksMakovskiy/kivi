@@ -14,12 +14,6 @@ login_manager = LoginManager(app)
 app.config['SECRET_KEY'] = '\\n\\xf6\\x8dn\\xe7C\\xc6b\\x80\\xb8\\xb5\\xc5x\\x9e!4\\xe58\\xbb\\xf0j\\xfa\\xcfW'
 
 
-#    #     #   #    #    ####     #
-#    #     #   #    #   #         #
-#    #  #  #   #    #   #         #
-#     ## ## .   #### .   #### .   #
-
-
 @login_manager.user_loader
 def load_user(name):
     return Userlogin(name)
