@@ -7,6 +7,23 @@ from flask_login import UserMixin
 base = DataCrude()
 
 
+class Userlogin:
+    def __init__(self, name) -> None:
+        self.__user = name
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return str()
+
+
 class UserCrude(UserMixin):
     def __init__(self) -> None:
         ...
