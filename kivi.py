@@ -44,25 +44,32 @@ def autpage():
         return render_template("auth.html")
 
 
-@app.route("/postmoney", methods=["GET"])
-def postmoney():
-    name = request.values.get("name")
-    postman = request.values.get("postman")
-    value = request.values.get("value")
-    valuename = request.values.get("valuename")
-    if name:
-        if user.UserCheak(name) == True:
-            if user.UserCheak(postman) == True:
-                if base.PostMoney(name, postman, valuename, value,) == True:
-                    return jsonify({"info": f"Succes"})
+@app.route("/user/<name>/postmoney", methods=["GET"])
+@login_required
+def postmoney(name):
+    if session["name"] == name:
+
+        postman = request.values.get("postman")
+        value = request.values.get("value")
+        valuename = request.values.get("valuename")
+        if name:
+            if user.UserCheak(name) == True:
+                if postman:
+                    if user.UserCheak(postman) == True:
+                        if base.PostMoney(name, postman, valuename, value,) == True:
+                            return jsonify({"info": "Succes"})
+                        else:
+                            return jsonify({"Error": f"insufficient funds"})
+                    else:
+                        return jsonify({"Error": f"People not found"})
                 else:
-                    return jsonify({"Error": f"insufficient funds"})
+                    return render_template("postmoney.html")
             else:
                 return jsonify({"Error": f"People not found"})
         else:
-            return jsonify({"Error": f"People not found"})
+            return render_template("postmoney.html")
     else:
-        return render_template("postmoney.html")
+        return render_template("dontdothis.html")
 
 
 @app.route("/reg", methods=["GET", "POST"])
