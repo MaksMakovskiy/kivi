@@ -63,11 +63,11 @@ def postmoney(name):
                     else:
                         return jsonify({"Error": f"People not found"})
                 else:
-                    return render_template("postmoney.html")
+                    return render_template("postmoney.html", name=name)
             else:
                 return jsonify({"Error": f"People not found"})
         else:
-            return render_template("postmoney.html")
+            return render_template("postmoney.html", name=name)
     else:
         return render_template("dontdothis.html")
 
