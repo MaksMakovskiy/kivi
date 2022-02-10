@@ -29,7 +29,6 @@ def autpage():
         password = request.values.get("psw")
         if name in base.usersname:
             if password == base.users[name]["password"]:
-                print(name)
                 userlog = Userlogin(name)
                 login_user(userlog)
                 session["name"] = name
@@ -75,7 +74,6 @@ def postmoney(name):
 @app.route("/reg", methods=["GET", "POST"])
 def regpage():
     base.DoDIctUsers()
-    print(base.users)
     if request.method == "GET":
         if request.values.get("name") != None:
             name = request.values.get("name")

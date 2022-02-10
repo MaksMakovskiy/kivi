@@ -27,10 +27,37 @@ body {
     <p>Post money | <a href="/user/{{name}}">Back</a></p>
 </div>    
 
-            <input type="number" placeholder="Enter value" name="name" required><select>
-                <option>USD</option>
-                <option>UAH</option>
-                <option>RUB</option>
-            </select>
+            
+
+
+            <form action="/user/{{name}}/postmoney">
+                <div class="container">
+
+                <label for="name"><b>Name</b></label>
+                <input type="text" placeholder="Enter Name" name="postman" required>
+            
+                <label for="name"><b>value</b></label>
+                <input type="number" placeholder="Enter value" name="value" required>
+                  
+                <select name="valuename">
+                    <option>USD</option>
+                    <option>UAH</option>
+                    <option>RUB</option>
+                </select>
+    
+                
+              
+                  <button type="submit" class="registerbtn">Post</button>
+                </div>
+                
+            
+              </form>
+              
+              </body>
+              </html>
+
+
+
+
 
 </body>

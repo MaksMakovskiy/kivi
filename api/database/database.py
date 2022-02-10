@@ -22,6 +22,7 @@ class DataCrude():
         return key[0][0]
 
     def PostMoney(self, myname, name, moneyvalue, value):
+        value = int(value)
         if self.CheakMoney(myname, moneyvalue, value) == True:
             self.fether.execute(
                 f"UPDATE Users Set {moneyvalue} = {moneyvalue} + {value} WHERE name = '{name}'")
