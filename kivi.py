@@ -56,15 +56,19 @@ def postmoney(name):
                 if postman:
                     if user.UserCheak(postman) == True:
                         if base.PostMoney(name, postman, valuename, value,) == True:
-                            return jsonify({"info": "Succes"})
+                            flash("Success")
+                            return render_template("postmoney.html", name=name)
                         else:
-                            return jsonify({"Error": f"insufficient funds"})
+                            flash("Insufficient funds")
+                            return render_template("postmoney.html", name=name)
                     else:
-                        return jsonify({"Error": f"People not found"})
+                        flash("People not found")
+                        return render_template("postmoney.html", name=name)
                 else:
                     return render_template("postmoney.html", name=name)
             else:
-                return jsonify({"Error": f"People not found"})
+                flash("People not found")
+                return render_template("postmoney.html", name=name)
         else:
             return render_template("postmoney.html", name=name)
     else:

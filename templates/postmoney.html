@@ -2,6 +2,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(255, 255, 255);
+    text-align: center;
 }
 
 * {
@@ -17,6 +18,11 @@ body {
 
 
 }
+
+.Error{
+    color: rgb(119, 0, 129);
+}
+
 </style>
 
 
@@ -25,25 +31,34 @@ body {
 
 <div class="Post_money">
     <p>Post money | <a href="/user/{{name}}">Back</a></p>
-</div>    
+</div>    <hr>
 
             
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="Error">
+            <p>{{ messages[0] }}</p>
+        </div>
+    {% endif %}
+    {% endwith %}  
+
+
 
 
             <form action="/user/{{name}}/postmoney">
                 <div class="container">
 
-                <label for="name"><b>Name</b></label>
-                <input type="text" placeholder="Enter Name" name="postman" required>
+                <label for="name"><b>Name</b></label><br>
+                <input type="text" placeholder="Enter Name" name="postman" required><br><br>
             
-                <label for="name"><b>value</b></label>
+                <label for="name"><b>value</b></label><br>
                 <input type="number" placeholder="Enter value" name="value" required>
                   
                 <select name="valuename">
                     <option>USD</option>
                     <option>UAH</option>
                     <option>RUB</option>
-                </select>
+                </select><br><br>
     
                 
               
