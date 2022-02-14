@@ -100,7 +100,7 @@ def regpage():
             return render_template("register.html")
 
 
-@ app.route("/user/<username>", methods=["GET"])
+@app.route("/user/<username>", methods=["GET"])
 @login_required
 def mainpage(username):
     if session["name"] == username:
