@@ -107,8 +107,6 @@ def mainpage(username):
         base.DoDIctUsers()
         if username in base.usersname:
             return render_template('main.html', name=username, USD=base.users[username]["money"]["USD"], UAH=base.users[username]["money"]["UAH"], RUB=base.users[username]["money"]["RUB"])
-        else:
-            return jsonify({"info": f"No user with name {username}"})
     else:
         return render_template("dontdothis.html")
 
