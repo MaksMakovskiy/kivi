@@ -48,16 +48,23 @@ class UserCrude():
             return False
 
     def UserRegister(self, name, psw, pswr):
-        self.name = name
-        self.password = psw
-        self.password_true = pswr
-        if self.password != self.password_true:
-            return "Passwords not same"
-        else:
-            if self.UserCheak(self.name) == None:
-                base.PrintUserToBase(self.name, self.password)
+        self.name = str(name)
+        self.password = str(psw)
+        self.password_true = str(pswr)
+
+    
+        try:
+            name = int(name)
+        except:
+            if self.password != self.password_true:
+                return "Passwords not same"
             else:
-                return "User with your name alredy registed"
+                if self.UserCheak(self.name) == None:
+                    base.PrintUserToBase(self.name, self.password)
+                else:
+                    return "User with your name alredy registed"
+        else:
+            return "int password"
 
 
 user = UserCrude()

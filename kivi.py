@@ -46,25 +46,21 @@ def autpage():
 @login_required
 def postmoney(name):
     if session["name"] == name:
-
         postman = request.values.get("postman")
         value = request.values.get("value")
         valuename = request.values.get("valuename")
-        if name:
-            if user.UserCheak(name) == True:
-                if postman:
-                    if user.UserCheak(postman) == True:
-                        if base.PostMoney(name, postman, valuename, value,) == True:
-                            flash("Success")
-                            return render_template("postmoney.html", name=name)
-                        else:
-                            flash("Insufficient funds")
-                            return render_template("postmoney.html", name=name)
-                    else:
-                        flash("People not found")
-                        return render_template("postmoney.html", name=name)
-                else:
+        if postman:
+            if user.UserCheak(postman) == True:
+                if name == session["name"]:
+                    flash("You cant send money to you")
                     return render_template("postmoney.html", name=name)
+                else:
+                    if base.PostMoney(name, postman, valuename, value,) == True:
+                        flash("Success")
+                        return render_template("postmoney.html", name=name)
+                    else:
+                        flash("Insufficient funds")
+                        return render_template("postmoney.html", name=name)
             else:
                 flash("People not found")
                 return render_template("postmoney.html", name=name)
@@ -82,11 +78,13 @@ def regpage():
             name = request.values.get("name")
             password = request.values.get("psw")
             password_true = request.values.get("psw-repeat")
-
             cheak = user.UserRegister(name, password, password_true)
 
             if cheak == "Passwords not same":
                 flash("Your passwords not same")
+                return render_template("register.html")
+            elif cheak == "int password":
+                flash("Your name must have 1 letter")
                 return render_template("register.html")
             elif cheak == "User with your name alredy registed":
                 flash(f"User with name: '{name}' alredy registed")
