@@ -51,7 +51,7 @@ def postmoney(name):
         valuename = request.values.get("valuename")
         if postman:
             if user.UserCheak(postman) == True:
-                if name == session["name"]:
+                if postman == session["name"]:
                     flash("You cant send money to you")
                     return render_template("postmoney.html", name=name)
                 else:
@@ -83,6 +83,9 @@ def regpage():
             if cheak == "Passwords not same":
                 flash("Your passwords not same")
                 return render_template("register.html")
+            elif cheak == "space in psw":
+                flash("In name or password shouldn't be space")
+                return render_template("register.html")
             elif cheak == "int password":
                 flash("Your name must have 1 letter")
                 return render_template("register.html")
@@ -110,4 +113,4 @@ def mainpage(username):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="192.168.0.103")
+    app.run(debug=True)

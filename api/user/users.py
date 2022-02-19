@@ -35,7 +35,7 @@ class UserCrude():
         else:
             return None
 
-    def UserLogin(self, data: dict) -> str | None:
+    def UserLogin(self, data: dict):
         self.name = data.get("name")
         self.password = str(data.get("password"))
         base.DoDIctUsers()
@@ -59,10 +59,13 @@ class UserCrude():
             if self.password != self.password_true:
                 return "Passwords not same"
             else:
-                if self.UserCheak(self.name) == None:
-                    base.PrintUserToBase(self.name, self.password)
+                if " " in psw or " " in name:
+                    return "space in psw"
                 else:
-                    return "User with your name alredy registed"
+                    if self.UserCheak(self.name) == None:
+                        base.PrintUserToBase(self.name, self.password)
+                    else:
+                        return "User with your name alredy registed"
         else:
             return "int password"
 
